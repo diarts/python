@@ -1,1 +1,1 @@
-# python
+   Изучаем pithon 
