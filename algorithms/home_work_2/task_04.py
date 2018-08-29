@@ -3,13 +3,13 @@
 
 count = int(input('Введите сколько элементов следующего ряда чисел: 1 -0.5 0.25 -0.125… нужно сложить между собой: '))
 value = 2
-summ = 0
+total = 0
 
-for i in range(1, count+1):
+for i in range(1, count + 1):
     if i % 2 == 0:
         value /= -2
     else:
         value = abs(value / 2)
-    summ += value
+    total += value
 
 print(f'Сумма из {count} чисел ряда 1 -0.5 0.25 -0.125… равна {summ}')
