@@ -7,7 +7,7 @@ letter = 31
 
 for _ in range(1, 11):
     for _ in range(1, 11):
-        if letter == 128:
+        if letter == 127:
             break
         else:
             letter += 1
