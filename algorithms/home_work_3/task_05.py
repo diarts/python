@@ -2,7 +2,7 @@
 # позицию в массиве.
 import random
 
-MIN_RAND = -100
+MIN_RAND = 10
 MAX_RAND = 100
 LIST_RANGE = 10
 
