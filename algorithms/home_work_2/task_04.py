@@ -12,4 +12,4 @@ for i in range(1, count + 1):
         value = abs(value / 2)
     total += value
 
-print(f'Сумма из {count} чисел ряда 1 -0.5 0.25 -0.125… равна {summ}')
+print(f'Сумма из {count} чисел ряда 1 -0.5 0.25 -0.125… равна {total}')
