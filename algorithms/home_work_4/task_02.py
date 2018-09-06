@@ -5,11 +5,15 @@ import cProfile
 def eratosfen(index):
     if index<600:
         LAST_INDEX = (index // 20)*150
-    else:
+    elif index<600000:
         LAST_INDEX = (index // 20) * 300
+    else:
+        LAST_INDEX = (index // 20) * 500
+
     sieve = [i for i in range(LAST_INDEX)]
+
     sieve[1] = 0
-    print (LAST_INDEX)
+
     for i in range(2, LAST_INDEX):
         if sieve[i] != 0:
             j = i * 2
@@ -38,7 +42,10 @@ def eratosfen(index):
 # cProfile.run('eratosfen(1000)')
 # 1    0.004    0.004    0.005    0.005 task_02.py:5(eratosfen)
 
-# Итог: Решето быстрее
+# cProfile.run('eratosfen(700000)')
+# 1    7.994    7.994   10.181   10.181 task_02.py:5(eratosfen)
+
+# Итог: Решето все еще лучши вариант
 
 # №2 Свой вариант
 
