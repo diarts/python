@@ -24,13 +24,13 @@ def m_create_2_for(range_raw, range_coll):
 # 100 loops, best of 3: 41.2 msec per loop
 
 # cProfile.run('m_create_2_for(10, 10)')
-# 1 0.000 0.000 0.000 0.000 task_01_1.py: 8(speed_test)
+# 1 0.000 0.000 0.000 0.000 task_01.py: 8(speed_test)
 
 # cProfile.run('m_create_2_for(100, 100)')
-# 1    0.000    0.000    0.025    0.025 task_01_1.py:8(speed_test)
+# 1    0.000    0.000    0.025    0.025 task_01.py:8(speed_test)
 
 # cProfile.run('m_create_2_for(1000, 1000)')
-#  1    0.000    0.000    2.634    2.634 task_01_1.py:8(speed_test)
+#  1    0.000    0.000    2.634    2.634 task_01.py:8(speed_test)
 
 # Итог: сложность данного алгоритма = О(N**2)
 
@@ -62,13 +62,13 @@ def m_create_1_for(size_matrix):
 # 100 loops, best of 3: 55.6 msec per loop
 
 # cProfile.run("m_create_1_for(10)")
-# 1 0.000 0.000 0.000 0.000 task_01_1.py: 33(m_create_1_for)
+# 1 0.000 0.000 0.000 0.000 task_01.py: 33(m_create_1_for)
 
 # cProfile.run("m_create_1_for(100)")
-# 1    0.006    0.006    0.039    0.039 task_01_1.py:33(m_create_1_for)
+# 1    0.006    0.006    0.039    0.039 task_01.py:33(m_create_1_for)
 
 # cProfile.run("m_create_1_for(1000)")
-# 1    0.663    0.663    3.401    3.401 task_01_1.py:33(m_create_1_for)
+# 1    0.663    0.663    3.401    3.401 task_01.py:33(m_create_1_for)
 
 # Итог: сложность данного алгоритма = О(N**2), при этом данный алгоритм медленнее чем алгоритм №1
 
@@ -101,13 +101,13 @@ def m_create_recursion(range_raw, range_coll, coll_count=0, f_matrix = []):
 #100 loops, best of 3: 45.4 msec per loop
 
 # cProfile.run('m_create_recursion(10, 10)')
-# 10/1    0.000    0.000    0.001    0.001 task_01_1.py:77(m_create_recursion)
+# 10/1    0.000    0.000    0.001    0.001 task_01.py:77(m_create_recursion)
 
 # cProfile.run('m_create_recursion(100, 100)')
-# 100/1    0.006    0.000    0.031    0.031 task_01_1.py:77(m_create_recursion)
+# 100/1    0.006    0.000    0.031    0.031 task_01.py:77(m_create_recursion)
 
 # cProfile.run('m_create_recursion(1000, 1000)')
-# 1000/1    0.583    0.001    3.165    3.165 task_01_1.py:79(m_create_recursion)
+# 1000/1    0.583    0.001    3.165    3.165 task_01.py:79(m_create_recursion)
 
 # Итог: сложность данного алгоритма так же О(N**2), при этом на небольшом размере матрицы (10, 10) он медленнее
 # алгоритмов №1 и №2, но на размере 100 и >, он выигрывает по времени у алгоритма №2, но для таких значений требуется
