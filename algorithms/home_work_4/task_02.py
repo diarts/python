@@ -2,10 +2,43 @@
 
 import cProfile
 #  №1 Решето Эратосфена
+def eratosfen(index):
+    if index<600:
+        LAST_INDEX = (index // 20)*150
+    else:
+        LAST_INDEX = (index // 20) * 300
+    sieve = [i for i in range(LAST_INDEX)]
+    sieve[1] = 0
+    print (LAST_INDEX)
+    for i in range(2, LAST_INDEX):
+        if sieve[i] != 0:
+            j = i * 2
+            while j < LAST_INDEX:
+                sieve[j] = 0
+                j += i
 
+    sieve_simple_num = [i for i in sieve if i != 0]
+    print(sieve_simple_num[index-1])
 
+# timeit find_simple_num(100):
+# 100 loops, best of 3: 393 usec per loop
 
+# timeit find_simple_num(500):
+# 100 loops, best of 3: 1.5 msec per loop
 
+# timeit find_simple_num(1000):
+# 100 loops, best of 3: 5.89 msec per loop
+
+# cProfile.run('eratosfen(100)')
+# 1    0.000    0.000    0.000    0.000 task_02.py:5(eratosfen)
+
+# cProfile.run('eratosfen(500)')
+# 1    0.001    0.001    0.001    0.001 task_02.py:5(eratosfen)
+
+# cProfile.run('eratosfen(1000)')
+# 1    0.004    0.004    0.005    0.005 task_02.py:5(eratosfen)
+
+# Итог: Решето быстрее
 
 # №2 Свой вариант
 
