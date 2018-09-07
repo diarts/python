@@ -15,19 +15,24 @@ count_company = 4
 #                 for i in range(1, count_company + 1)}
 #
 company_dict = {input(f'Введите название {i} компании: '):
-                    sum([float(random.randint(5, 10000000)) for j in range(1, 5)]) / 4
+                    int(sum([random.randint(1000, 10000000) for j in range(1, 5)]) / 4)
                 for i in range(1, count_company + 1)}
 company_dict = collections.OrderedDict(sorted(company_dict.items(), key=lambda x: x[1]))
 
 middle = 0
-for value, item in enumerate(company_dict):
-    middle += company_dict[item]
-middle /= len(company_dict)
-print(middle)
-print(company_dict)
+for company_name in company_dict:
+    middle += company_dict[company_name]
+middle = int(middle/len(company_dict))
 
-print('Компании, чья прибыль ниже средней(для всех предприятий) за год: ', end='')
-print(*list(item for value, item in enumerate(company_dict) if value < middle), sep=', ')
+print(f'\n\nВсе компани и их средняя прибыль за год: ')
+print(*list(f'{company_name}: {company_dict[company_name]}$, ' for company_name in company_dict))
+print(f'Средняя прибыль среди всех компаний за год = {middle}$')
 
-print('Компании, чья прибыль ниже средней(для всех предприятий) за год: ', end='')
-print(list(item for value, item in enumerate(company_dict) if value > middle))
+print('\nКомпании, чья прибыль больше средней(для всех предприятий) за год: ', end='')
+print(*list(f'{company_name}: {company_dict[company_name]}$'
+            for company_name in company_dict if company_dict[company_name] > middle), sep=', ')
+
+print('\nКомпании, чья прибыль ниже средней(для всех предприятий) за год: ', end='')
+print(*list(f'{company_name}: {company_dict[company_name]}$'
+            for company_name in company_dict if company_dict[company_name] < middle), sep=', ')
+
