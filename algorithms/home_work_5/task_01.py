@@ -5,18 +5,12 @@
 # Примечание: 4 квартала - это 4 разных прибыли ;-)
 
 import collections
-import random
+count_company = int(input('Введите количество компаний: '))
 
-# count_company = int(input('Введите количество компаний: '))
-count_company = 4
-
-# company_dict = {input(f'Введите название {i} компании: '):
-#                     sum([float(input(f'Введите прибыль компании {i} для {j} квартала: ')) for j in range(1, 5)])/4
-#                 for i in range(1, count_company + 1)}
-#
 company_dict = {input(f'Введите название {i} компании: '):
-                    int(sum([random.randint(1000, 10000000) for j in range(1, 5)]) / 4)
+                    int(sum([int(input(f'Введите прибыль компании {i} для {j} квартала: ')) for j in range(1, 5)])/4)
                 for i in range(1, count_company + 1)}
+
 company_dict = collections.OrderedDict(sorted(company_dict.items(), key=lambda x: x[1]))
 
 middle = 0
