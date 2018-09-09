@@ -7,6 +7,7 @@
 # A = 10, B=11, C=12, D=13, E=14, F=15
 import collections
 
+
 def num_converter(in_nums=True, *args):
     un_reverce_converter_dict = {'A': 10, 'B': 11, 'C': 12, 'D': 13, 'E': 14, 'F': 15}
     reverce_convert_dict = {10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E', 15: 'F'}
@@ -20,6 +21,7 @@ def num_converter(in_nums=True, *args):
         for index, num in enumerate(list):
             if num in converter_dict:
                 list[index] = converter_dict[num]
+
 
 def num_summ(num_1, num_2):
     if len(num_1) < len(num_2):
@@ -37,6 +39,7 @@ def num_summ(num_1, num_2):
 
     return deque_summ
 
+
 def alignment(deque):
     deque = collections.deque(deque)
     deque.reverse()
@@ -44,26 +47,76 @@ def alignment(deque):
 
     for index, num in enumerate(deque):
         num += value
-        rest = num % 15
-        num = num - rest
-        value = num // 15
-        deque[index] = rest
-    if value != 0:
+        if num < 16:
+            deque[index] = num
+        else:
+            rest = num % 16
+            value = num // 16
+            deque[index] = rest
+    if value != 0 and value > 16:
+        while True:
+            rest = value % 16
+            value = value // 16
+            deque[-1] = rest
+            deque.append(value)
+            if value < 16:
+                break
+    elif value !=0:
         deque.append(value)
-        print(deque)
-        deque.reverse()
-        print(deque)
+
+    deque.reverse()
     return deque
+
+
+def num_multi(num_1, num_2):
+    num_1 = collections.deque(num_1)
+    num_2 = collections.deque(num_2)
+    multy_line = collections.deque()
+    if len(num_2) > len(num_1):
+        finish_line = [0]*len(num_2)
+    else:
+        finish_line = [0]*len(num_1)
+    finish_line = collections.deque(finish_line)
+
+    num_1.reverse()
+    num_2.reverse()
+
+
+    for factor_1 in num_1:
+        for factor_2 in num_2:
+            multy_line.append(int(factor_1) * int(factor_2))
+
+        finish_line = num_summ(multy_line, finish_line)
+
+    finish_line.reverse()
+    return finish_line
+
+
 
 num_1 = collections.deque(input('Введите первое шестнадцатеричное число: ').upper())
 num_2 = collections.deque(input('Введите второе шестнадцатеричное число: ').upper())
 
 num_converter(True, num_1, num_2)
 
-deque_summ = num_summ(num_1.copy(), num_2.copy())
+deque_multy = num_multi(num_1, num_2)
 
-deque_summ = alignment(deque_summ)
-print(deque_summ)
+print('multi', deque_multy)
 
-num_converter(False, deque_summ)
-print(deque_summ)
+deque_multy = alignment(deque_multy)
+
+print('alignment', deque_multy)
+
+deque_multy = num_converter(False, deque_multy)
+
+print(deque_multy)
+
+
+
+# deque_summ = num_summ(num_1.copy(), num_2.copy())
+#
+# deque_summ = alignment(deque_summ)
+#
+# num_converter(False, deque_summ)
+# print(deque_summ, '\n')
+
+
