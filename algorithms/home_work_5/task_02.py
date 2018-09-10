@@ -6,6 +6,7 @@
 
 # A = 10, B=11, C=12, D=13, E=14, F=15
 import collections
+import re
 
 
 def num_converter(in_nums=True, *args):
@@ -23,10 +24,14 @@ def num_converter(in_nums=True, *args):
                 list[index] = converter_dict[num]
 
 
+'''Function converted hexadecimal symbol (A, B, C, D, E, F) in nums (11, 12, 13, 14, 15) and back.
+in_nums = True (default) if you need convert from symbol to nums
+in_nums = False if you need convert from nums to symbol'''
+
+
 def num_summ(num_1, num_2):
     if len(num_1) < len(num_2):
         num_1, num_2 = num_2, num_1
-
     deque_summ = collections.deque()
 
     for _ in range(len(num_2)):
@@ -36,8 +41,32 @@ def num_summ(num_1, num_2):
     for _ in range(len(num_1)):
         num = int(num_1.pop())
         deque_summ.appendleft(num)
-
     return deque_summ
+
+
+def num_multi(num_1, num_2):
+    num_1 = collections.deque(num_1)
+    num_2 = collections.deque(num_2)
+    multy_line = collections.deque()
+
+    if len(num_2) > len(num_1):
+        finish_line = collections.deque([0] * len(num_2))
+    else:
+        finish_line = collections.deque([0] * len(num_1))
+
+    num_1.reverse()
+    num_2.reverse()
+
+    for index, factor_1 in enumerate(num_1):
+        for factor_2 in num_2:
+            multy_line.appendleft(int(factor_1) * int(factor_2))
+
+        for _ in range(index):
+            multy_line.append(0)
+
+        finish_line = num_summ(multy_line, finish_line)
+
+    return finish_line
 
 
 def alignment(deque):
@@ -49,10 +78,12 @@ def alignment(deque):
         num += value
         if num < 16:
             deque[index] = num
+            value = 0
         else:
             rest = num % 16
             value = num // 16
             deque[index] = rest
+
     if value != 0 and value > 16:
         while True:
             rest = value % 16
@@ -61,62 +92,77 @@ def alignment(deque):
             deque.append(value)
             if value < 16:
                 break
-    elif value !=0:
+    elif value != 0:
         deque.append(value)
 
     deque.reverse()
     return deque
 
 
-def num_multi(num_1, num_2):
-    num_1 = collections.deque(num_1)
-    num_2 = collections.deque(num_2)
-    multy_line = collections.deque()
-    if len(num_2) > len(num_1):
-        finish_line = [0]*len(num_2)
+def hexadecimal_sum(num_1, num_2):
+    num_converter(True, num_1, num_2)
+    deque_summ = num_summ(num_1.copy(), num_2.copy())
+    deque_summ = alignment(deque_summ)
+    num_converter(False, deque_summ)
+    return deque_summ
+
+
+def hexadecimal_multiplication(num_1, num_2):
+    num_converter(True, num_1, num_2)
+    deque_multy = num_multi(num_2, num_1)
+    deque_multy = alignment(deque_multy)
+    num_converter(False, deque_multy)
+    return deque_multy
+
+
+def input_num():
+    re_string = '^[0-9ABCDEF]+$'
+    while True:
+        input_1 = input('Введите первое шестнадцатеричное число: ').upper()
+        if re.match(re_string, input_1) == None:
+            print('Вы ввели не шестнадцатеричное число, попробуйте еще раз!')
+        else:
+            input_1 = collections.deque(input_1)
+            break
+
+    while True:
+        input_2 = input('Введите второе шестнадцатеричное число: ').upper()
+        if re.match(re_string, input_2) == None:
+            print('Вы ввели не шестнадцатеричное число, попробуйте еще раз!')
+        else:
+            input_2 = collections.deque(input_2)
+            break
+    return input_1, input_2
+
+
+def print_hexadecimal(num_1, num_2, answer, type_print='Сумма'):
+    print(f'{type_print} двух шестнадцатеричных чисел ', end='')
+    print(*num_1, ' и ', *num_2, ' = ', *answer, '\n\n', sep='', end='')
+
+
+print('Добро пожаловать в программу сложения и умножения шестнадцатеричных чисел.\n')
+
+while True:
+    print('Выберите из списка, что вы хотете сделать:\n'
+          '1. Сложить два шестнадцатеричных числа\n'
+          '2. Перемножить два шестнадцатеричных числа\n'
+          '3. Выйти из программы\n')
+    try:
+        change = int(input('Введите номер действия, которое вы хотите сделать: '))
+
+    except ValueError:
+        print('Вы ввели не число. Нужно ввести номер действия которое вы хотите сделать числом! Попробуйте еще раз.\n')
+
     else:
-        finish_line = [0]*len(num_1)
-    finish_line = collections.deque(finish_line)
-
-    num_1.reverse()
-    num_2.reverse()
-
-
-    for factor_1 in num_1:
-        for factor_2 in num_2:
-            multy_line.append(int(factor_1) * int(factor_2))
-
-        finish_line = num_summ(multy_line, finish_line)
-
-    finish_line.reverse()
-    return finish_line
-
-
-
-num_1 = collections.deque(input('Введите первое шестнадцатеричное число: ').upper())
-num_2 = collections.deque(input('Введите второе шестнадцатеричное число: ').upper())
-
-num_converter(True, num_1, num_2)
-
-deque_multy = num_multi(num_1, num_2)
-
-print('multi', deque_multy)
-
-deque_multy = alignment(deque_multy)
-
-print('alignment', deque_multy)
-
-deque_multy = num_converter(False, deque_multy)
-
-print(deque_multy)
-
-
-
-# deque_summ = num_summ(num_1.copy(), num_2.copy())
-#
-# deque_summ = alignment(deque_summ)
-#
-# num_converter(False, deque_summ)
-# print(deque_summ, '\n')
-
-
+        if change not in {1, 2, 3}:
+            print(f'В программе нет действия с номером {change}. Попробуйте еще раз.')
+        elif change == 3:
+            break
+        elif change == 1:
+            num_1, num_2 = input_num()
+            answer = hexadecimal_sum(num_1.copy(), num_2.copy())
+            print_hexadecimal(num_1, num_2, answer)
+        else:
+            num_1, num_2 = input_num()
+            answer = hexadecimal_multiplication(num_1.copy(), num_2.copy())
+            print_hexadecimal(num_1, num_2, answer, 'Произведение')
