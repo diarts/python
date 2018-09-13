@@ -10,6 +10,10 @@ import re
 
 
 def num_converter(in_nums=True, *args):
+    '''Function converted hexadecimal symbol (A, B, C, D, E, F) in nums (11, 12, 13, 14, 15) and back.
+    in_nums = True (default) if you need convert from symbol to nums
+    in_nums = False if you need convert from nums to symbol'''
+
     un_reverce_converter_dict = {'A': 10, 'B': 11, 'C': 12, 'D': 13, 'E': 14, 'F': 15}
     reverce_convert_dict = {10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E', 15: 'F'}
 
@@ -22,11 +26,6 @@ def num_converter(in_nums=True, *args):
         for index, num in enumerate(list):
             if num in converter_dict:
                 list[index] = converter_dict[num]
-
-
-'''Function converted hexadecimal symbol (A, B, C, D, E, F) in nums (11, 12, 13, 14, 15) and back.
-in_nums = True (default) if you need convert from symbol to nums
-in_nums = False if you need convert from nums to symbol'''
 
 
 def num_summ(num_1, num_2):
