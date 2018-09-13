@@ -37,8 +37,8 @@ def test_size(array, reqursion_level=1):
     return global_size
 
 
-# 1) сохранение данных по омпаниям в Dict
-# Итог: размер класса Dict = 240 байт,
+# 1) сохранение данных по омпаниям в dict
+# Итог: размер класса dict = 240 байт,
 # размер словаря с 4 ключами компаний и их средней прибылью за 4 квартала = 583 байт
 # Для решения данной задачи нам потребуется 2 дополнительных перебора всех переменных в словаре и
 # сравнение их со средней стоимостью для вывода сначала копаний с прибылью больше средней, а затем с меньше средней.
@@ -47,7 +47,7 @@ COUNT_COMPANY = 4
 QUARTES = 4
 company_dict = {i: int(sum([random.randint(1000, 1000000) for _ in range(4)]) / QUARTES)
                 for i in ('Coca Cola', 'Mac Donalds', 'Teremock', 'Crysler')}
-print(f'Общий размер словаря company_dict = {test_size(company_dict)}')
+print(f'Общий размер словаря company_dict = {test_size(company_dict)}\n')
 
 
 # 2) сохранение данных по омпаниям в OrderedDict
@@ -61,7 +61,7 @@ company_dict = {i: int(sum([random.randint(1000, 1000000) for _ in range(4)]) / 
                 for i in ('Coca Cola', 'Mac Donalds', 'Teremock', 'Crysler')}
 company_dict = collections.OrderedDict(sorted(company_dict.items(), key=lambda x: x[1]))
 
-print(f'Общий размер OrderedDict company_dict = {test_size(company_dict)}')
+print(f'Общий размер OrderedDict company_dict = {test_size(company_dict)}\n')
 
 
 # 3) сохранение данных по омпаниям в множестве set
@@ -91,4 +91,4 @@ for i in ('Coca Cola', 'Mac Donalds', 'Teremock', 'Crysler'):
 
 print(f'Общий размер множества all_company = {test_size(all_company)}')
 
-Вывод:
+# Вывод: Самый выгодный тип хранения данных для решения данной задачи из 3 представленных способов, это использование стандартного словаря, он, заполненный, потребляет в общем наименьшее количество памяти, а имено - 583 байта
