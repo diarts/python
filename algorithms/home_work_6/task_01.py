@@ -25,39 +25,70 @@ def test_size(array, reqursion_level=1):
     print('\t' * reqursion_level, f'имеет размерность = {global_size}')
 
     if hasattr(array, '__iter__'):
-        if array.__class__ == collections.OrderedDict:
+        if array.__class__ == collections.OrderedDict or array.__class__ == dict:
             for value in array:
-                global_size += test_size(value, 2)
-                global_size += test_size(array[value], 3)
+                global_size += test_size(value, reqursion_level + 1)
+                global_size += test_size(array[value], reqursion_level + 2)
 
         elif not isinstance(array, str):
             for i in array:
-                global_size += test_size(i, 2)
+                global_size += test_size(i, reqursion_level + 1)
 
     return global_size
 
 
 # 1) сохранение данных по омпаниям в Dict
 # Итог: размер класса Dict = 240 байт,
-# размер словаря с 4 ключами компаний и их средней прибылью за 4 квартала = 471 байт
+# размер словаря с 4 ключами компаний и их средней прибылью за 4 квартала = 583 байт
 # Для решения данной задачи нам потребуется 2 дополнительных перебора всех переменных в словаре и
-# сравнение их со средней стоимостью для вывода сначала самых больших
+# сравнение их со средней стоимостью для вывода сначала копаний с прибылью больше средней, а затем с меньше средней.
 
 COUNT_COMPANY = 4
-company_dict = {i: int(sum([random.randint(1000, 1000000) for _ in range(4)]) / 4)
+QUARTES = 4
+company_dict = {i: int(sum([random.randint(1000, 1000000) for _ in range(4)]) / QUARTES)
                 for i in ('Coca Cola', 'Mac Donalds', 'Teremock', 'Crysler')}
-print(f'Общий размер company_dict = {test_size(company_dict)}')
+print(f'Общий размер словаря company_dict = {test_size(company_dict)}')
 
 
 # 2) сохранение данных по омпаниям в OrderedDict
 # Итог: размер класса OrderedDict = 496 байт,
 # размер словаря с 4 ключами компаний и их средней прибылью за 4 квартала = 839 байт
-# Для решения данной задачи нам потребуется 2 дополнительных перебора всех переменных в словаре и
-# сравнение их со средней стоимостью для вывода сначала самых больших
-
+# Для решения данной задачи нам так же потребуется 2 дополнительных перебора всех переменных в словаре и
+# сравнение их со средней стоимостью для вывода сначала копаний с прибылью больше средней, а затем с меньше средней.
 COUNT_COMPANY = 4
-company_dict = {i: int(sum([random.randint(1000, 1000000) for _ in range(4)]) / 4)
+QUARTES = 4
+company_dict = {i: int(sum([random.randint(1000, 1000000) for _ in range(4)]) / QUARTES)
                 for i in ('Coca Cola', 'Mac Donalds', 'Teremock', 'Crysler')}
 company_dict = collections.OrderedDict(sorted(company_dict.items(), key=lambda x: x[1]))
 
-print(f'Общий размер company_dict = {test_size(company_dict)}')
+print(f'Общий размер OrderedDict company_dict = {test_size(company_dict)}')
+
+
+# 3) сохранение данных по омпаниям в множестве set
+# Итог: размер класса set переменной all_company = 224 байт,
+# внутри получается 4 объекта классна __main__.Company с размером 72 байта
+# размер словаря с 4 ключами компаний и их прибылью за 4 квартала и средней прибылью = 1623 байта
+# Для решения данной задачи нам все так же потребуется 2 дополнительных перебора всех переменных в множестве и
+# сравнение их со средней стоимостью для вывода сначала сначала копаний с прибылью больше средней,
+# а затем с меньше средней.
+
+COUNT_COMPANY = 4
+QUARTES = 4
+Company = collections.namedtuple('Company', ['name', 'quartes', 'profit'])
+all_company = set()
+
+for i in ('Coca Cola', 'Mac Donalds', 'Teremock', 'Crysler'):
+    quartes = []
+    profit = 0
+
+    for j in range(QUARTES):
+        quartes.append(random.randint(1000, 1000000))
+        profit += quartes[j]
+
+    comp = Company(name=i, quartes = tuple(quartes), profit = profit)
+
+    all_company.add(comp)
+
+print(f'Общий размер множества all_company = {test_size(all_company)}')
+
+Вывод:
