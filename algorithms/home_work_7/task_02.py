@@ -25,17 +25,19 @@ def merge_sort(list):
 
     return final_list
 
-
-try:
-    len_array = int(input('Введите длину массива: '))
-except ValueError:
-    print('Вы ввели не число, длина может быть указана только числом!')
-else:
-    if len_array == 0:
-        print('Длина массива не может быть = 0!')
-    elif len_array < 0:
-        print('Длина массива не может быть отрицательной!')
+while True:
+    try:
+        len_array = int(input('Введите длину массива: '))
+    except ValueError:
+        print('Вы ввели не число, длина может быть указана только числом!')
     else:
-        my_list = [random.randint(0, 50) for i in range(len_array)]
-        print(f'Рандомно созданный массив длиной {len_array}: \n{my_list}\n')
-        print(f'Отсортированый массив: \n{merge_sort(my_list)}')
+        if len_array == 0:
+            print('Длина массива не может быть = 0!')
+        elif len_array < 0:
+            print('Длина массива не может быть отрицательной!')
+        else:
+            break
+
+my_list = [random.randint(0, 50) for i in range(len_array)]
+print(f'Рандомно созданный массив длиной {len_array}: \n{my_list}\n')
+print(f'Отсортированый массив: \n{merge_sort(my_list)}')
