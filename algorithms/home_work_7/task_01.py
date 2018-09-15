@@ -39,6 +39,13 @@ def buble_sort(list, first_be='max'):
 
 
 my_list = [random.randint(-100, 100) for _ in range(20)]
-print(my_list)
-print(f'отсортированный массив с помощью ускореной функции \n {my_buble_sort(my_list)}')
-print(f'отсортированный массив с помощью обычной функции \n{buble_sort(my_list)}')
+print(f'Заданный массив:\n{my_list}')
+
+my_buble_list, my_buble_count = my_buble_sort(my_list)
+print(f'\nОтсортированный массив с помощью ускореной функции \n{my_buble_list},\n сортировка осуществлена за '
+      f'{my_buble_count} циклов')
+
+# Сравнение с стандартной функцией, показаной на уроке
+classic_buble_list, classic_buble_count = buble_sort(my_list)
+print(f'\nОтсортированный массив с помощью стандартной функции \n{classic_buble_list},\n сортировка осуществлена за '
+      f'{classic_buble_count} циклов')
