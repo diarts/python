@@ -171,7 +171,7 @@ def haffman_encoding(word):
 while True:
     word = input('Введите текст, который хотите заархивировать: ')
     if word == '':
-        print('Вы ничего не ввели, попробуйе еще раз: ')
+        print('Вы ничего не ввели, попробуйе еще раз!')
     else:
         break
 

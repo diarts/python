@@ -31,7 +31,13 @@ def hash_count(your_word):
     return hash_list
 
 
-my_word = input('Введите строку, количество хешированных подстрок которой вы хотите найти: ')
+while True:
+    my_word = input('Введите строку, количество хешированных подстрок которой вы хотите найти: ')
+    if my_word == '':
+        print('Вы ничего не ввели, попробуйте еще раз!')
+    else:
+        break
+
 my_word_hash = hash_count(my_word)
 print(f'\nВ вашей строке {my_word} содержится {len(my_word_hash)} хешированных подстрок:')
 
