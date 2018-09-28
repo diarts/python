@@ -1,0 +1,32 @@
+{% extends 'html_meta.html' %}
+{% load static %}
+
+{% block page_title %}
+Точка старта
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'home_work_site/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'home_work_site/css/media.css' %}">
+{% endblock %}
+
+{% block page_content %}
+{% include 'home_work/components/header.html' %} <!-- header -->
+
+<!--bread crumb Start-->
+<div class="bread_crumb">
+    <span>Главная</span>
+</div>
+<!--bread crumb End-->
+
+<div class="content">
+    <div class="index_text">
+        <div class="index_title">Здравствуйте!</div>
+        Рады приветствовать вас в нашем магазине "Точка старта". У нас представлено большое разнообразие моделей
+        спортивной обуви. Вы сможете найти самую удобную обувь для вашего спортивного направления. Вся модели имеют
+        сертификацию и являются оригиналами. приятных покупок &#9786;
+    </div> <!-- index_text -->
+
+{% include 'home_work/components/slider.html' with slider_class="slider" %} <!-- slider -->
+</div> <!-- content -->
+{% endblock %}
