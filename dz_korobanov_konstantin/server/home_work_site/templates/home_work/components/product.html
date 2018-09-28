@@ -1,11 +1,8 @@
 <div class="catalog_referense">
-    <a href="{{product_href}}">
-           <img src="{{product_image_src}}" alt="{{product_name}} - фото" title="{{product_name}}" class="catalog_image">
-            <p>кроссовки {{product_name}}</p>
+    <a href="{% url 'product_description' href=product.href %}">
+           <img src="{{product.image}}" alt="{{product.name}} - фото" title="{{product.name}}" class="catalog_image">
+            <p>кроссовки {{product.name}}</p>
     </a>
-    <form>
-        <button type="button" class="catalog_buy_button">
-            <img src="image/busket_logo.png" title="into the basket" alt="into the basket button">В корзину
-        </button>
-    </form>
+
+    {% include 'home_work/components/buy_button.html' %}
 </div>

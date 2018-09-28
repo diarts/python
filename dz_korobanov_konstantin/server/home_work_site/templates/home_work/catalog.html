@@ -20,16 +20,12 @@
 <!--bread crumb End-->
 
 <div class="content">
-    <h1  class="titles">
-        Каталог товара
-    </h1><br>
+    <h1  class="titles">Каталог товара</h1> <br>
 
     <div class="product_list">
-        {% include 'home_work/components/product.html' with product_href='/Adidas_Performance/' product_image_src='image\Adidas_Performance.jpg' product_name='Adidas Performance' %}
-        {% include 'home_work/components/product.html' with product_href='/Nike_Flex_Contact/' product_image_src='image\Nike_Flex_Contact.jpg' product_name='Nike Flex Contact' %}
-
-        {% include 'home_work/components/product.html' with product_href='/Asics_Gel_Pulse_9/' product_image_src='image\Asics_Gel_Pulse_9.jpg' product_name='Asics Gel-Pulse' %}
-        {% include 'home_work/components/product.html' with product_href='/asics_gel_solution_speed/' product_image_src='image\asics_gel_solution_speed.jpg' product_name='asics gel solution speed' %}
+        {% for product in product_list %}
+            {% include 'home_work/components/product.html' with product=product %}
+        {% endfor %}
     </div>
 </div>
 
