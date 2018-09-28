@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from . import products
+from django.shortcuts import render, get_object_or_404, get_list_or_404
+from . import models
 
 
 def main_page(request):
@@ -7,12 +7,15 @@ def main_page(request):
 
 
 def catalog(request):
-    return render(request, 'home_work/catalog.html', {})
+    product_list = get_list_or_404(models.Product)
+    return render(request, 'home_work/catalog.html', {'product_list': product_list})
 
 
-def product_description(request):
-    product = str(request)[20:-3]
-    return render(request, 'home_work/components/product_description.html', {'product': products.products_dict[product]})
+def product_description(request, href):
+    name = href.replace('_', ' ')
+    product = get_object_or_404(models.Product, name=name)
+
+    return render(request, 'home_work/components/product_description.html', {'product': product})
 
 
 def contacts(request):

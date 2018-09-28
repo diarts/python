@@ -6,85 +6,75 @@
 {% endblock %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'home_work_site/css/style.css' %}">
-<link rel="stylesheet" href="{% static 'home_work_site/css/media.css' %}">
+    <link rel="stylesheet" href="{% static 'home_work_site/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'home_work_site/css/media.css' %}">
 {% endblock %}
 
 {% block page_content %}
-{% include 'home_work/components/header.html' %}<!-- Header -->
-<!--bread crumb Start-->
-<div class="bread_crumb">
-    <a href="/ ">Главная>></a><a href="/catalog/">Каталог>></a> <span>{{product.name}}</span>
-</div>
-<!--bread crumb End-->
-<div class="content">
-    <h1 class="titles">
-        Кроссовки {{product.name}}
-    </h1><br>
-
-    <div class="image_and_brief_description">
-        <div class="image_product">
-            <a href="../image/{{product.name}}.jpg" target="_blank">
-                <img src="../image/{{product.name}}.jpg" alt="{{product.name}} - фото" title="{{product.name}}">
-            </a>
-        </div>
-
-        <div class="brief_description">
-            <h3 class="product_description">
-                <b> Описание товара </b>
-            </h3>
-
-            <p class="detailed_description">
-                {{product.description}}
-            </p>
-            <button type="button" class="buy_button">
-                <img src="../image/busket_logo.png" title="into the basket" alt="into the basket button">В корзину
-            </button>
-        </div>
-        <br> <br>
+    {% include 'home_work/components/header.html' %} <!-- Header -->
+    <div class="bread_crumb"> <!--bread crumb-->
+        <a href="/ ">Главная>></a><a href="/catalog/">Каталог>></a> <span>{{product.name}}</span>
     </div>
-    <h3 class="product_description">
-        <b> Характеристики товара </b>
-    </h3>
 
-    <table class="product_characteristics">
-        <thead>
-        <tr>
-            <th>Название</th>
-            <th colspan="4">Показатель</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Пол:</td>
-            <td colspan="4">{{product.sex}}</td>
-        </tr>
-        <tr>
-            <td>Цвета:</td>
-            {% for color in product.color %}
-            <td colspan="2">{{color}}</td>
-            {% endfor %}
-        </tr>
-        <tr>
-            <td>Тип:</td>
-            <td colspan="4">{{product.type}}}</td>
-        </tr>
-        <tr>
-            <td>Размеры</td>
-            {% for size in product.size %}
-            <td>{{size}}</td>
-            {% endfor %}
-        </tr>
-        </tbody>
-    </table>
+    <div class="content">
 
-    <h3 class="product_description">
-        <b> Подробное описание товара </b>
-    </h3>
+        <h1 class="titles">
+            Кроссовки {{product.name}}
+        </h1><br>
 
-    <p class="detailed_description">
-        {{product.detailed_description}}
-    </p>
-</div>
+        <div class="image_and_brief_description">
+            <div class="image_product">
+                <a href="../image/{{product.name}}.jpg" target="_blank">
+                    <img src="../image/{{product.name}}.jpg" alt="{{product.name}} - фото" title="{{product.name}}">
+                </a>
+            </div>
 
+            <div class="brief_description">
+                <h3 class="product_description">
+                    <b> Описание товара </b>
+                </h3>
+
+                <p class="detailed_description">
+                    {{product.description}}
+                </p>
+                {% include 'home_work/components/buy_button.html' %}
+
+            </div><br><br>
+        </div>
+
+        <h3 class="product_description"><b> Характеристики товара </b></h3>
+        <table class="product_characteristics">
+            <thead>
+            <tr>
+                <th>Название</th>
+                <th colspan="4">Показатель</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Пол:</td>
+                <td colspan="4">{{product.sex}}</td>
+            </tr>
+            <tr>
+                <td>Цвета:</td>
+                {% for color in product.colors.all %}
+                <td colspan="2">{{color}}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Тип:</td>
+                <td colspan="4">{{product.type}}</td>
+            </tr>
+            <tr>
+                <td>Размеры</td>
+                {% for size in product.size.all %}
+                <td>{{size}}</td>
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+
+        <h3 class="product_description"><b> Подробное описание товара </b></h3>
+        <p class="detailed_description">{{product.det_description}}</p>
+    </div>
 {% endblock %}
