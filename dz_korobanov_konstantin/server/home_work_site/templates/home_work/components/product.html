@@ -1,5 +1,5 @@
 <div class="catalog_referense">
-    <a href="{% url 'product_description' href=product.href %}">
+    <a href="{% url 'product_description' name=product.name %}">
            <img src="{{product.image}}" alt="{{product.name}} - фото" title="{{product.name}}" class="catalog_image">
             <p>кроссовки {{product.name}}</p>
     </a>

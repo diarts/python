@@ -61,8 +61,3 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-
-    def href(self):
-        href = self.name
-        href = href.replace(' ', '_')
-        return href

@@ -11,8 +11,8 @@ def catalog(request):
     return render(request, 'home_work/catalog.html', {'product_list': product_list})
 
 
-def product_description(request, href):
-    name = href.replace('_', ' ')
+def product_description(request, name):
+    # name = href.replace('_', ' ')
     product = get_object_or_404(models.Product, name=name)
 
     return render(request, 'home_work/components/product_description.html', {'product': product})
